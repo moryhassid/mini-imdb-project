@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+       <style>
+        /* Your CSS styles from previous code */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        nav {
+            margin-top: 1rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #007BFF;
+            padding: 0.5rem 1rem;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: #007BFF;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<h1> 🎥Welcome to Mory's IMDB 🍿</h1>
+    <a href="{{ url_for('home_page') }}">Go to Homepage</a>
+    <a href="{{ url_for('signup') }}">Add a New Movie</a>
+</body>
+</html>

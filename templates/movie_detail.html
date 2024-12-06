@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ movie.title }}</title>
+    <style>
+        /* Your CSS styles from previous code */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 300px;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+        }
+
+        input, textarea {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ movie.title }}</h1>
+    </header>
+    <div class="movie-details">
+        <img src="{{ url_for('static', filename=movie.poster_path) }}" alt="{{ movie.title }}" style="width:100px;height:150px;">
+        <p>{{ movie.description }}</p>
+        <p>Directed by: {{ movie.director }}</p>
+        <p>Main Actors: {{ movie.actor1 }}, {{ movie.actor2 }}, {{ movie.actor3 }}, {{ movie.actor4 }}</p>
+        <p>Year of Release: {{ movie.release_year }}</p>
+    </div>
+
+    <h2>Reviews</h2>
+    <ul>
+        {% for review in reviews %}
+        <li>
+            <p><strong>{{ review.username }}</strong> ({{ review.date_posted }}):</p>
+            <p>{{ review.content }}</p>
+            <p><strong>Rating:</strong> {{ review.rating }}/10</p>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Submit a Review</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.username.label }} {{ form.username(size=32) }}<br>
+        {{ form.content.label }} {{ form.content(rows=4, cols=50) }}<br>
+        {{ form.rating.label }} {{ form.rating(size=32) }}<br>
+        {{ form.submit() }}
+    </form>
+
+    <a href="{{ url_for('home_page') }}">Back to Movies</a>
+</body>
+</html>

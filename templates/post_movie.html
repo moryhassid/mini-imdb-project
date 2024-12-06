@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post a New Movie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 300px;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+        }
+
+        input, textarea {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Post a New Movie</h1>
+    </header>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+
+        <label for="poster_path">Poster:</label>
+        <input type="file" id="poster_path" name="poster_path" required>
+
+        <label for="director">Director:</label>
+        <input type="text" id="director" name="director" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+
+        <label for="release_year">Year of Release:</label>
+        <input type="number" id="release_year" name="release_year" required>
+
+        <label for="actor1">Actor 1:</label>
+        <input type="text" id="actor1" name="actor1" required>
+
+        <label for="actor2">Actor 2:</label>
+        <input type="text" id="actor2" name="actor2" required>
+
+        <label for="actor3">Actor 3:</label>
+        <input type="text" id="actor3" name="actor3" required>
+
+        <label for="actor4">Actor 4:</label>
+        <input type="text" id="actor4" name="actor4" required>
+
+        <button type="submit">Post Movie</button>
+    </form>
+    <a href="{{ url_for('home_page') }}">Back to Movies</a>
+</body>
+</html>
