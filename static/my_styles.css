@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.movie-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.movie-poster {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.movie-poster img {
+    display: block;
+    margin: 0 auto;
+}
+
+nav {
+    margin-top: 1rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #007BFF;
+    padding: 0.5rem 1rem;
+    border: 1px solid #007BFF;
+    border-radius: 5px;
+}
+
+nav a:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
