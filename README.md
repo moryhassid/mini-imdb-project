@@ -27,3 +27,12 @@ This is third page, add a new movie:
 <p align="center">
   <img src="images\post_new_movie.jpg" width="700">
 </p>
+
+Here is an illustration of the architecture of my app, we have 3 parts:
+* The **SQlite DB** which stores the whole data in a table manner, both movies and reviews.
+* The **Flask Server** listens to the user requests and connects to the DB and retrieves the relevant data.
+* The end-user uses the **Browser** and requests or posts reviews.  
+
+<p align="center">
+  <img src="images\architecture.jpg" width="700">
+</p>
