@@ -14,9 +14,16 @@ Here is my website landing page:
 <p align="center">
   <img src="images\homepage.jpg" width="700">
 </p>
+
 This is a second page, which shows all current movies in the database:
 
 
 <p align="center">
   <img src="images\movie_posters.jpg" width="700">
+</p>
+
+This is third page, add a new movie:
+
+<p align="center">
+  <img src="images\post_new_movie.jpg" width="700">
 </p>
