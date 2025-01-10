@@ -1,12 +1,9 @@
 from flask import Flask, render_template, request, url_for, redirect
-# from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms import StringField, TextAreaField, SubmitField, IntegerField
+from wtforms.validators import DataRequired, Length, NumberRange
 import sqlite3
 from datetime import datetime
-from wtforms import IntegerField
-from wtforms.validators import NumberRange
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'  # Needed for Flask-WTF forms
@@ -15,7 +12,7 @@ app.config['SECRET_KEY'] = 'your_secret_key'  # Needed for Flask-WTF forms
 class ReviewForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=1, max=100)])
     content = TextAreaField('Review', validators=[DataRequired(), Length(min=1)])
-    rating = IntegerField('Rating', validators=[DataRequired(), NumberRange(min=1, max=10)])
+    rating = IntegerField('Rating (1-10)', validators=[DataRequired(), NumberRange(min=1, max=10)])
     submit = SubmitField('Submit Review')
 
 
@@ -44,7 +41,6 @@ def home_page():
             movies_list += list(dict(movie).values())
 
         movies_list = [movie.replace('\\', '/') for movie in movies_list]
-        print(movies_list)
 
         if not movies_posters_paths:
             return "Movies were not found.", 404
@@ -95,6 +91,17 @@ def movie_detail(movie_id):
             username = form.username.data
             content = form.content.data
             rating = form.rating.data
+
+            # Ensure the rating is an integer and within the valid range (1-10)
+            if rating < 1 or rating > 10:
+                form.rating.errors.append("Please provide a valid rating between 1 and 10.")
+                return render_template("movie_detail.html", movie=dict(movie), form=form, reviews=[])
+
+            # Ensure the rating is a whole number
+            if isinstance(rating, float):
+                form.rating.errors.append("Please provide a whole number (no decimals).")
+                return render_template("movie_detail.html", movie=dict(movie), form=form, reviews=[])
+
             cur.execute(
                 "INSERT INTO review_tbl (username, content, date_posted, rating, movie_id) VALUES (?, ?, ?, ?, ?)",
                 (username, content, f"{day}-{month}-{year}", rating, movie_id)
@@ -115,5 +122,3 @@ def movie_detail(movie_id):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
