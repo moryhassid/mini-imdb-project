@@ -7,6 +7,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'  # Needed for Flask-WTF forms
+db_path = r"C:\Users\mory9\PycharmProjects\mini-imdb-project\movies.db"
 
 
 class ReviewForm(FlaskForm):
@@ -17,7 +18,7 @@ class ReviewForm(FlaskForm):
 
 
 def get_movies():
-    with sqlite3.connect("movies.db") as my_db:
+    with sqlite3.connect(db_path) as my_db:
         my_db.row_factory = sqlite3.Row
         cur = my_db.cursor()
         movies = cur.execute('SELECT * FROM movie_tbl').fetchall()
@@ -32,7 +33,7 @@ def index():
 @app.route("/homepage/", methods=['GET'])
 def home_page():
     movies_list = []
-    with sqlite3.connect("movies.db") as my_db:
+    with sqlite3.connect(db_path) as my_db:
         my_db.row_factory = sqlite3.Row
         cur = my_db.cursor()
         movies_posters_paths = cur.execute('SELECT poster_path FROM movie_tbl').fetchall()
@@ -61,9 +62,8 @@ def signup():
         actor3 = request.form.get('actor3')
         actor4 = request.form.get('actor4')
 
-        with sqlite3.connect("movies.db") as my_db:
+        with sqlite3.connect(db_path) as my_db:
             cur = my_db.cursor()
-            poster_path = 'blabla'
             cur.execute(
                 "INSERT INTO movie_tbl (title, poster_path, director, description, release_year, actor1, actor2, actor3, actor4) "
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -76,7 +76,7 @@ def signup():
 
 @app.route("/movie/<int:movie_id>", methods=['GET', 'POST'])
 def movie_detail(movie_id):
-    with sqlite3.connect("movies.db") as my_db:
+    with sqlite3.connect(db_path) as my_db:
         my_db.row_factory = sqlite3.Row
         cur = my_db.cursor()
         movie = cur.execute('SELECT * FROM movie_tbl WHERE id = ?', (movie_id,)).fetchone()
