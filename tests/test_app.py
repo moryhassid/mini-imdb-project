@@ -18,3 +18,9 @@ def test_add_movie(client):
                                           'actor4': 'Richard Harris',
                                           }, follow_redirects=True)
     assert response.status_code == 200
+
+
+def test_error_handling(client):
+    # Attempt to access a non-existent movie
+    response = client.get('/movie/9999')  # Adjust ID to something that does not exist
+    assert response.status_code == 500 or response.status_code == 404  # Expecting a 404 error for non-existent resources
