@@ -36,3 +36,49 @@ Here is an illustration of the architecture of my app, we have 3 parts:
 <p align="center">
   <img src="images\architecture.jpg" width="700">
 </p>
+
+### Tests:
+
+##Test Cases:
+
+1. Homepage Tests
+
+test_homepage_title: Verifies the homepage title contains "Welcome".
+
+test_click_homepage: Checks if the Homepage link navigates correctly.
+
+test_home_page: Ensures the homepage loads successfully and contains expected content.
+
+2. Movie Management Tests
+
+test_click_new_movie: Ensures the "New Movie" link opens the correct page.
+
+test_add_new_movie: Validates adding a new movie via form submission.
+
+test_add_movie: Validates adding a movie through API.
+
+3. Error Handling Tests
+
+test_error_handling: Ensures appropriate error response for non-existent movie pages.
+
+##Fixtures:
+
+Fixtures are defined in tests/conftest.py and include:
+
+init_db: Sets up a temporary SQLite database for testing.
+
+browser: Initializes the Selenium WebDriver.
+
+client: Provides a test client for functional API testing.
+
+base_url: Provides the base URL of the Flask application.
+
+##Test Reports:
+
+After running the tests with the --html flag, an HTML report will be generated, summarizing:
+
+Test results (passed/failed/skipped)
+
+Screenshots (if enabled)
+
+Execution time per test
