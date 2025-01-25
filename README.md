@@ -1,3 +1,11 @@
+<!-- TOC -->
+* [Movie of project:](#movie-of-project)
+* [Tests:](#tests)
+  * [Test Cases:](#test-cases)
+  * [Fixtures:](#fixtures)
+  * [Test Reports:](#test-reports)
+<!-- TOC -->
+# Movie of project:
 
 As part of the QA Experts course, I worked on a project to create a movie database with a Flask server.
 
@@ -37,9 +45,9 @@ Here is an illustration of the architecture of my app, we have 3 parts:
   <img src="images\architecture.jpg" width="700">
 </p>
 
-### Tests:
+# Tests:
 
-##Test Cases:
+## Test Cases:
 
 1. Homepage Tests
 
@@ -61,7 +69,7 @@ test_add_movie: Validates adding a movie through API.
 
 test_error_handling: Ensures appropriate error response for non-existent movie pages.
 
-##Fixtures:
+## Fixtures:
 
 Fixtures are defined in tests/conftest.py and include:
 
@@ -73,7 +81,7 @@ client: Provides a test client for functional API testing.
 
 base_url: Provides the base URL of the Flask application.
 
-##Test Reports:
+## Test Reports:
 
 After running the tests with the --html flag, an HTML report will be generated, summarizing:
 
