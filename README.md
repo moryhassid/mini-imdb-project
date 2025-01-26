@@ -81,12 +81,3 @@ client: Provides a test client for functional API testing.
 
 base_url: Provides the base URL of the Flask application.
 
-## Test Reports:
-
-After running the tests with the --html flag, an HTML report will be generated, summarizing:
-
-Test results (passed/failed/skipped)
-
-Screenshots (if enabled)
-
-Execution time per test
