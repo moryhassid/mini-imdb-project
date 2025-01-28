@@ -1,8 +1,12 @@
 # Selenium Tests
 import pytest
+from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
+from flask import Flask, render_template
+
+app = Flask(__name__)
 
 
 def test_homepage_title(browser):
@@ -70,3 +74,8 @@ def test_add_new_movie(browser):
 
     except Exception as e:
         pytest.fail(f"Failed to add new movie: {e}")
+
+
+def test_invalid_movie_id(client, init_db):
+    response = client.get('/movie/999')
+    assert response.status_code == 404

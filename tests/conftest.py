@@ -2,6 +2,10 @@ import sqlite3
 import pytest
 from app import app
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.edge.service import Service as EdgeService
+from selenium.webdriver.firefox.service import Service as FirefoxService
+
 
 
 # For sharing fixtures among  multiple test files
@@ -30,5 +34,23 @@ def browser():
     options = webdriver.ChromeOptions()
     # options.add_argument()
     driver = webdriver.Chrome(options=options)
+    yield driver
+    driver.quit()
+
+
+@pytest.fixture(params=["edge", "chrome", "firefox"], scope="class")
+def driver(request):
+    browser = request.param
+    if browser == "edge":
+        service = EdgeService(EdgeChromiumDriverManager().install())
+        driver = webdriver.Edge(service=service)
+    elif browser == "chrome":
+        service = ChromeService(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service)
+    elif browser == "firefox":
+        service = FirefoxService(GeckoDriverManager().install())
+        driver = webdriver.Firefox(service=service)
+
+    request.cls.driver = driver
     yield driver
     driver.quit()
