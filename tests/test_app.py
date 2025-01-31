@@ -11,7 +11,7 @@ def test_home_page(client):
 def test_add_movie(client):
     # title, poster_path, director, description, release_year, actor1, actor2, actor3, actor4
     response = client.post('/post', data={'title': "Harry Potter and the Sorcerer's Stone",
-                                          'poster_path': 'images\harry_potter.jpg',
+                                          'poster_path': r'images\harry_potter.jpg',
                                           'director': 'Chris Columbus',
                                           'description': 'fantasy film',
                                           'release_year': '2001',
@@ -34,13 +34,15 @@ def test_get_reviews(client, init_db):
         cur = my_db.cursor()
         cur.execute(
             "INSERT INTO movie_tbl (title, poster_path, director, description, release_year, actor1, actor2, actor3, actor4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            ('Test Movie', 'test_path', 'Test Director', 'Test Description', 2024, 'Actor1', 'Actor2', 'Actor3',
+            ('Harry Potter', 'test_path', 'Test Director', 'Test Description', 2024, 'Actor1', 'Actor2', 'Actor3',
              'Actor4'))
+
         cur.execute("INSERT INTO review_tbl (username, content, date_posted, rating, movie_id) VALUES (?, ?, ?, ?, ?)",
                     ('Tester', 'Great movie!', '28-07-2024', 8, 1))
         my_db.commit()
     response = client.get('/movie/1')
-    assert (b'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">\n<title>500 Inter'
-            b'nal Server Error</title>\n<h1>Internal Server Error</h1>\n<p>The server en'
-            b'countered an internal error and was unable to complete your request. Either '
-            b'the server is overloaded or there is an error in the application.</p>\n')
+
+    assert response.status_code == 200, f"Expected 200 but got {response.status_code}"
+
+    assert b"Harry Potter" in response.data, "Movie title not found in response"
+    assert b"Great movie" in response.data, "Review content not found in response"
